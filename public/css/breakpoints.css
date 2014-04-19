@@ -1,0 +1,71 @@
+/*
+	Rule 30
+
+	Author: Jason Lunsford
+	Version: 1.0
+	
+	-----------------------------------------
+	CONTENTS - BREAKPOINTS.CSS
+	-----------------------------------------
+	1. STRUCTURE
+	2. CONTENT
+
+*/
+
+/* 1. STRUCTURE
+----------------------------------------------------------------------------------------*/
+
+	@media (min-width: 768px) {
+		body:before { content:"tablet"; }
+
+		/* Toggle Display Flag(s) */
+
+		/* End Display Flags */
+
+	}
+
+	@media (min-width: 992px) {
+		body:before { content:"desktop"; }
+
+		/* Toggle Display Flag(s) */
+
+		/* End Display Flags */
+
+	}
+
+	@media (min-width: 1200px) {
+		body:before { content:"widescreen"; }
+
+		/* Toggle Display Flag(s) */
+
+		/* End Display Flags */
+
+	}
+
+
+/* 2. CONTENT
+----------------------------------------------------------------------------------------*/
+
+	@media (min-width: 768px) {
+
+		/* Toggle Display Flag(s) */
+
+		/* End Display Flags */
+
+	}
+
+	@media (min-width: 992px) {
+
+		/* Toggle Display Flag(s) */
+
+		/* End Display Flags */
+
+	}
+
+	@media (min-width: 1200px) {
+
+		/* Toggle Display Flag(s) */
+
+		/* End Display Flags */
+		
+	}

@@ -1,0 +1,33 @@
+/*
+	Rule 30
+
+	Author: Jason Lunsford
+	Version: 1.0
+	
+	-----------------------------------------
+	CONTENTS - CORE.CSS
+	-----------------------------------------
+	1. STRUCTURE
+	2. CONTENT
+
+*/
+
+/* 1. STRUCTURE
+----------------------------------------------------------------------------------------*/
+
+	/* Flag for JS powered toggling */
+	body:before {
+		content:"mobile";
+		display:block;
+		left:-9999px;
+		position:absolute;
+		top:0px;
+	}
+
+
+/* 2. CONTENT
+----------------------------------------------------------------------------------------*/
+
+	/*********************** 
+	 Global Settings
+	 ***********************/
