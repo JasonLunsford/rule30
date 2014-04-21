@@ -24,6 +24,8 @@
 		top:0px;
 	}
 
+	.wrapper { padding-top:15px; }
+
 
 /* 2. CONTENT
 ----------------------------------------------------------------------------------------*/
@@ -31,3 +33,79 @@
 	/*********************** 
 	 Global Settings
 	 ***********************/
+
+	/*********************** 
+	 Index Elements
+	 ***********************/
+
+	.desktopTitleBox { display:none; }
+
+	.staticBarTitle {
+	 	font-size:52px;
+	 	line-height:1;
+	 	margin:0px;
+	}
+
+	.mobileTitle {
+		margin-bottom:10px;
+		text-align:center;
+	}
+
+	.staticBarRuleBox {	 	
+	 	margin:0px;
+	 	text-align:right;
+	}
+
+	.buttonBox {
+		text-align:center;
+	}
+
+	.rowCounter { margin:5px 0px 0px; }
+
+	.puzzleKeyCell {
+		border:1px solid #222222;
+		border:1px 0px 1px 1px;
+		display:inline-block;
+		height:70px;
+		padding:3px;
+		width:11.4%;
+	}
+
+	.puzzleKeyCellRow { text-align:center; }
+
+	.cellBox {
+		border:1px solid #909090;
+		display:inline-block;
+		height:6px;
+		margin:1px;
+		width:6px;
+	}
+
+	.black { background-color:#222222; }
+
+	/*********************** 
+	 Rendered Puzzle View Elements
+	 ***********************/
+
+	.puzzleBox {
+		border:2px solid #222222;
+		border-radius:8px;
+		height:371px;
+		margin-top:10px;
+		padding-top:15px;
+		padding-bottom:15px;
+		text-align:center;
+	}
+
+	.renderedRow {
+		height:21px;
+		margin:0px;
+		padding:0px;
+	}
+
+	.renderedRow div {
+		border:1px solid #F9F9F9;
+		display:inline-block;
+		height:21px;
+		width:3.2%;
+	}

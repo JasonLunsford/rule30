@@ -7,9 +7,6 @@
     <meta name="description" content="">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -26,18 +23,135 @@
 </head>
 <body data-ng-controller='PuzzleController'>
 
-    <div class="container">
+    <div class="container wrapper">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                  <div class="panel-body">
-                    <h3>Test</h2>
-                  </div>
+            <div class="col-xs-12 mobileTitleBox">
+                <h1 class="staticBarTitle mobileTitle">Rule 30</h1>
+            </div>
+            <div class="col-sm-4 col-md-3 col-lg-4 desktopTitleBox">
+                <h1 class="staticBarTitle">Rule 30</h1>
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-9 col-lg-8">
+                <div class="row">
+                    <div class="col-xs-3 staticBarRuleBox buttonBox">
+                        <button type="button"
+                                class="btn btn-lg"
+                                ng-class="runLoop ? 'btn-info' : 'btn-success'"
+                                data-ng-click="buildMyPuzzle()"
+                                render-me>{{ buttonText }}</button>
+                        <p class="rowCounter">Row 1 / 16</p>
+                    </div>
+                    <div class="col-xs-9 staticBarRuleBox puzzleKeyBox">
+                        <div class="puzzleKeyCell">
+                            <div class="puzzleKeyCellRow">
+                                <span class="cellBox black"></span>
+                                <span class="cellBox black"></span>
+                                <span class="cellBox black"></span>
+                            </div>
+                            <div class="puzzleKeyCellRow">
+                                <span class="cellBox"></span>
+                            </div>
+                            <div class="puzzleKeyCellRow">
+                                <span>0</span>
+                            </div>
+                        </div>
+                        <div class="puzzleKeyCell">
+                            <div class="puzzleKeyCellRow">
+                                <span class="cellBox black"></span>
+                                <span class="cellBox black"></span>
+                                <span class="cellBox"></span>
+                            </div>
+                            <div class="puzzleKeyCellRow">
+                                <span class="cellBox"></span>
+                            </div>
+                            <div class="puzzleKeyCellRow">
+                                <span>0</span>
+                            </div>
+                        </div>
+                        <div class="puzzleKeyCell">
+                            <div class="puzzleKeyCellRow">
+                                <span class="cellBox black"></span>
+                                <span class="cellBox"></span>
+                                <span class="cellBox black"></span>
+                            </div>
+                            <div class="puzzleKeyCellRow">
+                                <span class="cellBox"></span>
+                            </div>
+                            <div class="puzzleKeyCellRow">
+                                <span>0</span>
+                            </div>
+                        </div>
+                        <div class="puzzleKeyCell">
+                            <div class="puzzleKeyCellRow">
+                                <span class="cellBox black"></span>
+                                <span class="cellBox"></span>
+                                <span class="cellBox"></span>
+                            </div>
+                            <div class="puzzleKeyCellRow">
+                                <span class="cellBox black"></span>
+                            </div>
+                            <div class="puzzleKeyCellRow">
+                                <span>1</span>
+                            </div>
+                        </div>
+                        <div class="puzzleKeyCell">
+                            <div class="puzzleKeyCellRow">
+                                <span class="cellBox"></span>
+                                <span class="cellBox black"></span>
+                                <span class="cellBox black"></span>
+                            </div>
+                            <div class="puzzleKeyCellRow">
+                                <span class="cellBox black"></span>
+                            </div>
+                            <div class="puzzleKeyCellRow">
+                                <span>1</span>
+                            </div>
+                        </div>
+                        <div class="puzzleKeyCell">
+                            <div class="puzzleKeyCellRow">
+                                <span class="cellBox"></span>
+                                <span class="cellBox black"></span>
+                                <span class="cellBox"></span>
+                            </div>
+                            <div class="puzzleKeyCellRow">
+                                <span class="cellBox black"></span>
+                            </div>
+                            <div class="puzzleKeyCellRow">
+                                <span>1</span>
+                            </div>
+                        </div>
+                        <div class="puzzleKeyCell">
+                            <div class="puzzleKeyCellRow">
+                                <span class="cellBox"></span>
+                                <span class="cellBox"></span>
+                                <span class="cellBox black"></span>
+                            </div>
+                            <div class="puzzleKeyCellRow">
+                                <span class="cellBox black"></span>
+                            </div>
+                            <div class="puzzleKeyCellRow">
+                                <span>1</span>
+                            </div>
+                        </div>
+                        <div class="puzzleKeyCell">
+                            <div class="puzzleKeyCellRow">
+                                <span class="cellBox"></span>
+                                <span class="cellBox"></span>
+                                <span class="cellBox"></span>
+                            </div>
+                            <div class="puzzleKeyCellRow">
+                                <span class="cellBox"></span>
+                            </div>
+                            <div class="puzzleKeyCellRow">
+                                <span>0</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <section class="col-lg-12" data-ui-view="renderedPuzzleView"></section>
+            <section id="puzzleBox" class="col-sm-12 col-md-12 col-lg-12 puzzleBox" data-ui-view="renderedPuzzleView"></section>
         </div>
     </div>
 

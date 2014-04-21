@@ -49,8 +49,31 @@
 	@media (min-width: 768px) {
 
 		/* Toggle Display Flag(s) */
-
+		.desktopTitleBox { display:block; }
+		.mobileTitleBox { display:none; }
 		/* End Display Flags */
+
+		.buttonBox {
+			height:52px;
+		}
+
+		.puzzleKeyCell {
+			height:86px;
+		}
+
+		.cellBox {
+			height:5px;
+			width:5px;
+		}
+
+		.puzzleBox { height:402px; }
+
+		.renderedRow { height:23px; }
+
+		.renderedRow div {
+			height:23px;
+			width:23px;
+		}
 
 	}
 
@@ -60,6 +83,24 @@
 
 		/* End Display Flags */
 
+		.puzzleKeyCell {
+			height:70px;
+		}
+
+		.cellBox {
+			height:12px;
+			width:12px;
+		}
+
+		.puzzleBox { height:515px; }
+
+		.renderedRow { height:30px; }
+
+		.renderedRow div {
+			height:30px;
+			width:30px;
+		}
+
 	}
 
 	@media (min-width: 1200px) {
@@ -67,5 +108,23 @@
 		/* Toggle Display Flag(s) */
 
 		/* End Display Flags */
+
+		.buttonBox {
+			height:70px;
+		}
 		
+		.staticBarTitle {
+			font-size:70px;
+			letter-spacing:5px;
+		}
+
+		.puzzleBox { height:593px; }
+
+		.renderedRow { height:35px; }
+
+		.renderedRow div {
+			height:35px;
+			width:35px;
+		}
+
 	}
