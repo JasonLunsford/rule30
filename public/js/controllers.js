@@ -3,83 +3,60 @@
 angular.module('rule30.controllers', []).
 	controller('PuzzleController', ['$scope', function ($scope) {
 
-		var iterations = 15;
-		var collection = [ { "column":15, "color":"black" } ];
-		var priorCollection = [];
-		var priorCollectionLength;
-		var currentRow;
+		var rows = 0;
+		var seedRow = ["white","white","black","white","white"];
+		var newRow = [];
 
-		var currentSquare = {};
-		var squareOffset = 0;
-		var advanceMe = 0;
 
-		// logic to color in box @ row 0, column 15 goes here
-		console.log(collection)
+		var testLeftSquare;
+		var testCenterSquare;
+		var testRightSquare;
+		var finalSquareColor;
 
-		for ( var n=1; n < iterations ; n++ ) {
-		   currentRow = iterations - n;
+		buildRow(seedRow);
 
-		   while (priorCollection.length > 0) {
-		      priorCollection.shift();
-		   }
+		function buildRow(priorRow) {
+			newRow = processRow(priorRow);
 
-		   priorCollection = JSON.parse(JSON.stringify(collection));
-		   priorCollectionLength = priorCollection.length;
+			newRow.unshift("white");
+			newRow.unshift("white");
+			newRow.push("white");
+			newRow.push("white");
 
-		   while (collection.length > 0) {
-		      collection.shift();
-		   }
-
-		   for ( var b=0; b < (priorCollectionLength+2); b++ ) {
-		       currentSquare.left = currentRow + b - 1;
-		       currentSquare.center = currentRow + b;
-		       currentSquare.right = currentRow + b + 1;
-
-		       // determine pattern above square
-		       if ( currentSquare.left < priorCollection[0].column ) {
-		           currentSquare.leftColor = "white";
-		       } else {
-		           currentSquare.leftColor = priorCollection[b-2].color;
-		       }
-
-		       if ( currentSquare.center < priorCollection[0].column || currentSquare.center > priorCollection[priorCollectionLength-1].column ) {
-		           currentSquare.centerColor = "white";
-		       } else {
-		           currentSquare.centerColor = priorCollection[b-1].color;
-		       }
-
-		       if ( currentSquare.right > priorCollection[priorCollectionLength-1].column ) {
-		           currentSquare.centerColor = "white";
-		       } else {
-		           currentSquare.centerColor = priorCollection[b].color;
-		       }
-
-		       // determine color square is assigned, based on pattern
-			   currentSquare.color = "white"
-
-		       if ( currentSquare.leftColor == "black" &&
-		       	    currentSquare.centerColor == "white" &&
-		       	    currentSquare.rightColor == "white" ) { currentSquare.color = "black" }
-		       else if ( currentSquare.leftColor == "white" &&
-		       	    	 currentSquare.centerColor == "black" &&
-		       	    	 currentSquare.rightColor == "black" ) { currentSquare.color = "black" }
-		       else if ( currentSquare.leftColor == "white" &&
-		       	    	 currentSquare.centerColor == "black" &&
-		       	    	 currentSquare.rightColor == "white" ) { currentSquare.color = "black" }
-		       else if ( currentSquare.leftColor == "white" &&
-		       	    	 currentSquare.centerColor == "white" &&
-		       	    	 currentSquare.rightColor == "black" ) { currentSquare.color = "black" }
-
-		       // determine square position
-		   	   currentSquare.position = iterations + squareOffset + advanceMe;
-
-		       collection[b] = {"column":currentSquare.position, "color":currentSquare.color}
-		       advanceMe = advanceMe + 1;
-		   }
-		   advanceMe = 0;
-		   squareOffset = squareOffset - 1;
-		   console.log(collection);
+			rows = rows + 1;
+			if (rows < 6 ) { buildRow(newRow); }
+			else { console.log("Done!"); return; }
 		}
 
-		
+		function processRow(currentRow) {
+		    var resultRow = [];
+
+			for ( var n = 0; n < currentRow.length-2; n++ ) {
+				testLeftSquare = currentRow[n];
+				testCenterSquare = currentRow[n+1];
+				testRightSquare = currentRow[n+2];
+
+				finalSquareColor = "black";
+				if ( testLeftSquare === "black" &&
+					 testCenterSquare === "black" &&
+					 testRightSquare === "black" ) { finalSquareColor = "white"; }
+
+				if ( testLeftSquare === "black" &&
+					 testCenterSquare === "black" &&
+					 testRightSquare === "white" ) { finalSquareColor = "white"; }
+
+				if ( testLeftSquare === "black" &&
+					 testCenterSquare === "white" &&
+					 testRightSquare === "black" ) { finalSquareColor = "white"; }
+
+				if ( testLeftSquare === "white" &&
+					 testCenterSquare === "white" &&
+					 testRightSquare === "white" ) { finalSquareColor = "white"; }
+
+				resultRow.push(finalSquareColor);
+			}
+			console.log(resultRow);
+			return resultRow;
+		};
+
 	}]);
