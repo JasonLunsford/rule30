@@ -3,6 +3,8 @@
 angular.module('rule30.controllers', []).
 	controller('PuzzleController', ['$scope', function ($scope) {
 
+		// ---------- Variables Powering Recursion ----------
+
 		// initialize loop
 		var rows = 0;
 
@@ -15,6 +17,8 @@ angular.module('rule30.controllers', []).
 		var testCenterSquare;
 		var testRightSquare;
 		var finalSquareColor;
+
+		// ---------- UI Related Functions (Buttons) ----------
 
 		// loop stop
 		$scope.runLoop = false;
@@ -32,6 +36,20 @@ angular.module('rule30.controllers', []).
 				buildRow(seedRow);
 			}
 		}
+
+		// ---------- Page Load Grid Assembly ----------
+
+		/* AngularJS does not afford a easy way to iterate over simple integers using ng-repeat, so we'll just use a pseudo-collection
+		   with a value passed in that represents the total number of rows we want - in this case 15 additional. */
+	    $scope.numberOfRows = function(row) {
+	        return new Array(row);
+	    };
+
+	    $scope.numberOfCells = function(cells) {
+	    	return new Array(cells);
+	    }
+
+		// ---------- Recursion Warp Engine ----------
 
 		// Adds ghost squares to both ends of any given array to afford correct calculation
 		function buildRow(priorRow) {
