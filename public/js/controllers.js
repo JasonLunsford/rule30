@@ -18,23 +18,54 @@ angular.module('rule30.controllers', []).
 		var testRightSquare;
 		var finalSquareColor;
 
-		// ---------- UI Related Functions (Buttons) ----------
+		// ---------- UI Related Functions & Containers ----------
 
-		// loop stop
-		$scope.runLoop = false;
+		var puzzleBox = document.querySelector('#puzzleBox');
+		var theRow;
+		var theSquare;
+		var targetSquare;
+
+		// contain completed puzzle
+		$scope.readyToRender = [];
+
+		// run again flag
+		$scope.runAgain = false;
 
 		// Button Text
 		$scope.buttonText = "Begin!";
 
 		// Build button
 		$scope.buildMyPuzzle = function() {
-			if ( $scope.runLoop ) {
-				buildRow(seedRow);
-			} else {
-				// clean up board first
-				$scope.runLoop = true;
-				buildRow(seedRow);
+			buildRow(seedRow);
+		}
+
+		$scope.renderMyPuzzle = function() {
+			var puzzleLayers = $scope.readyToRender.length;
+			var offSetter = 1;
+
+			for ( var k = 0; k < puzzleLayers; k++ ) {
+				$scope.readyToRender[k].shift();
+				$scope.readyToRender[k].shift();
+				$scope.readyToRender[k].pop();
+				$scope.readyToRender[k].pop();
+
+				var firstSquare = 15 - offSetter;
+				for ( var i = 0; i < (2*offSetter + 1); i++ ) {
+					if ( firstSquare >= 0 && k < (puzzleLayers - 1)) {
+						theRow = "#r"+k;
+						theSquare = "#c"+firstSquare;
+
+						targetSquare = angular.element(puzzleBox.querySelector(theRow).querySelector(theSquare));
+
+						if ( $scope.readyToRender[k][i] === "black" ) { targetSquare.addClass("black"); }
+					}
+
+					firstSquare = firstSquare + 1;
+				}
+				offSetter++;
 			}
+			$scope.buttonText = "Again?";
+			$scope.runAgain = true;
 		}
 
 		// ---------- Page Load Grid Assembly ----------
@@ -54,7 +85,6 @@ angular.module('rule30.controllers', []).
 		// Adds ghost squares to both ends of any given array to afford correct calculation
 		function buildRow(priorRow) {
 			newRow = processRow(priorRow);
-			$scope.rowToRender = newRow;
 
 			newRow.unshift("white");
 			newRow.unshift("white");
@@ -63,9 +93,9 @@ angular.module('rule30.controllers', []).
 
 			// stop recursion by row 15, or when user clicks Stop
 			rows = rows + 1;
-			if (rows < 16 && $scope.runLoop ) { buildRow(newRow); }
+			if (rows < 16 ) { buildRow(newRow); }
 			else {
-				$scope.buttonText = "Again?";
+				$scope.renderMyPuzzle();
 				return;
 			}
 		}
@@ -98,7 +128,8 @@ angular.module('rule30.controllers', []).
 
 				resultRow.push(finalSquareColor);
 			}
-			console.log(resultRow);
+			//console.log(resultRow);
+			$scope.readyToRender.push(resultRow);
 			return resultRow;
 		};
 
