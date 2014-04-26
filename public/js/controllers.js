@@ -91,7 +91,6 @@ angular.module('rule30.controllers', []).
 			newRow.push("white");
 			newRow.push("white");
 
-			// stop recursion by row 15, or when user clicks Stop
 			rows = rows + 1;
 			if (rows < 16 ) { buildRow(newRow); }
 			else {
@@ -128,7 +127,7 @@ angular.module('rule30.controllers', []).
 
 				resultRow.push(finalSquareColor);
 			}
-			//console.log(resultRow);
+
 			$scope.readyToRender.push(resultRow);
 			return resultRow;
 		};
