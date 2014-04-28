@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('rule30.controllers', []).
-	controller('PuzzleController', ['$scope', function ($scope) {
+	controller('PuzzleController', ['$scope', '$timeout', function ($scope, $timeout) {
 
 		// ---------- Variables Powering Recursion ----------
 
@@ -25,23 +25,60 @@ angular.module('rule30.controllers', []).
 		var theSquare;
 		var targetSquare;
 
+		var puzzleLayers;
+		var offSetter;
+
 		// contain completed puzzle
 		$scope.readyToRender = [];
 
 		// run again flag
-		$scope.runAgain = false;
+		$scope.firstRun = true;
 
 		// Button Text
 		$scope.buttonText = "Begin!";
 
+		$scope.checkPuzzleState = function() {
+			if ( !$scope.firstRun ) {
+				puzzleLayers = $scope.readyToRender.length;
+				for ( var m = 0; m < (puzzleLayers-1); m++ ){
+					for ( var n = 0; n <= 31; n++ ){
+						theRow = "#r"+m;
+						theSquare = "#c"+n;
+						targetSquare = angular.element(puzzleBox.querySelector(theRow).querySelector(theSquare));
+
+						targetSquare.removeClass("black");
+					}
+				}
+				$scope.pausePlease(1);
+			} else {
+				$scope.renderMyPuzzle();
+			}
+		}
+
+		// setTimeout, the Angular Way
+		$scope.pausePlease = function(beats) {
+			if ( beats <= 0 ) {
+				$scope.renderMyPuzzle();
+				return;
+			}
+			$timeout(function() {
+				var countDown = beats - 1;
+				$scope.pausePlease(countDown);
+			}, 1000);
+		}
+
 		// Build button
 		$scope.buildMyPuzzle = function() {
+			while ( $scope.readyToRender.length > 0 ) {
+				$scope.readyToRender.shift();
+			}
+
 			buildRow(seedRow);
 		}
 
 		$scope.renderMyPuzzle = function() {
-			var puzzleLayers = $scope.readyToRender.length;
-			var offSetter = 1;
+			puzzleLayers = $scope.readyToRender.length;
+			offSetter = 1;
 
 			for ( var k = 0; k < puzzleLayers; k++ ) {
 				$scope.readyToRender[k].shift();
@@ -65,7 +102,7 @@ angular.module('rule30.controllers', []).
 				offSetter++;
 			}
 			$scope.buttonText = "Again?";
-			$scope.runAgain = true;
+			$scope.firstRun = false;
 		}
 
 		// ---------- Page Load Grid Assembly ----------
@@ -94,7 +131,9 @@ angular.module('rule30.controllers', []).
 			rows = rows + 1;
 			if (rows < 16 ) { buildRow(newRow); }
 			else {
-				$scope.renderMyPuzzle();
+				rows = 0;
+				//$scope.renderMyPuzzle();
+				$scope.checkPuzzleState();
 				return;
 			}
 		}
